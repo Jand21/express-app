@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  app:
+    image: jand12/express-app:latest
+    container_name: express-app
+    ports:
+      - "3000:8080"  
+    restart: always
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_POLL_INTERVAL: 300
+      WATCHTOWER_CLEANUP: "true"
+    restart: always
